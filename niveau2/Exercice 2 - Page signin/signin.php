@@ -23,7 +23,7 @@ if(isset($_POST['forminscription'])){
     if ($email != $email2){
          $erreur = 'Resaisissez votre adresse mail';
     } 
-    if (!preg_match('@[A-Z]@', $mdp) && !preg_match('@[a-a]@', $mdp) && !preg_match('@[0-9]@', $mdp) && (strlen($mdp) >= 8)) {
+    if (!preg_match('@[A-Z]@', $mdp) && !preg_match('@[a-z]@', $mdp) && !preg_match('@[0-9]@', $mdp) && (strlen($mdp) >= 8)) {
 
         $erreur = 'Votre mot de passe doit être composé de 8 caractères, d\'au moins un chiffre et de lettres majuscules et minuscules';
     }
