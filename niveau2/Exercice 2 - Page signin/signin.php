@@ -1,32 +1,51 @@
 <?php
-$bdd = new PDO('mysql:dbname=connexions;host=127.0.0.1;port=3306', 'root', 'root');
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=espace_membre', 'root', '');
 
 if(isset($_POST['forminscription'])){
+
     $choix = $_POST['pro_or_not'];
     $cgu = $_POST['cgu'];
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $email = htmlspecialchars($_POST['email']);
+    $email2 = htmlspecialchars($_POST['email2']);
     $mdp = sha1($_POST['mdp']);
 
     if(empty($choix) || empty($cgu)) {
+
         $erreur = 'Vous devez cocher toutes les cases';
+        var_dump(empty($choix));
+    } 
+    if(empty($nom) || empty($prenom) || empty($email) || empty($mdp)){
 
-    } else if(empty($nom) || empty($prenom) || empty($email) || empty($mdp)){
-            $erreur = 'Vous devez remplir tous les champs';
+        $erreur = 'Vous devez remplir tous les champs';
+    }
+    if ($email != $email2){
+         $erreur = 'Resaisissez votre adresse mail';
+    } 
+    if (!preg_match('@[A-Z]@', $mdp) && !preg_match('@[a-a]@', $mdp) && !preg_match('@[0-9]@', $mdp) && (strlen($mdp) >= 8)) {
+
+        $erreur = 'Votre mot de passe doit être composé de 8 caractères, d\'au moins un chiffre et de lettres majuscules et minuscules';
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+
+        $erreur = 'Votre adresse mail n\'est pas valide';
+
+    } else { 
+        $reqmail = $bdd->prepare("SELECT * FROM utilisateurs WHERE email = ?");
+	    $reqmail->execute(array($email));
+        $mailexist = $reqmail->rowCount();
+      
+        if ($mailexist == 0){
+            $insertmbr = $bdd->prepare("INSERT INTO utilisateurs(nom, prenom, email, mdp, is_pro_or_not) VALUES(?, ?, ?, ?, ?)");
+            $insertmbr->execute(array($nom, $prenom, $email, $mdp, $choix));
+            $erreur = "Votre compte a bien été créé !";
         } else{
-            $insertMbre = $bdd->prepare("INSERT INTO utilisateur(nom, prenom, email, mdp) VALUES(?, ?, ?, ?)");
-            $insertMbre->execute(array($nom, $prenom, $email, $mdp));
-            $erreur = 'Votre compte a bien été crée';
+            $erreur = 'Votre adresse email est déjà liée à un compte';
         }
-
-
+    }
 }
-
-
-
 ?>
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -44,7 +63,7 @@ if(isset($_POST['forminscription'])){
                     <label for="pseudo">Nom :</label>
                 </td>
                 <td>
-                    <input type="text" placeholder="Votre nom" id="nom" name="nom" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" />
+                    <input type="text" placeholder="Votre nom" id="nom" name="nom" value="<?php if(isset($nom)) { echo $nom; } ?>" />
                 </td>
             </tr>
             <tr>
@@ -52,15 +71,23 @@ if(isset($_POST['forminscription'])){
                     <label for="mail">Prénom :</label>
                 </td>
                 <td>
-                    <input type="text" placeholder="Votre prenom" id="prenom" name="prenom" value="<?php if(isset($mail)) { echo $mail; } ?>" />
+                    <input type="text" placeholder="Votre prenom" id="prenom" name="prenom" value="<?php if(isset($prenom)) { echo $prenom; } ?>" />
                 </td>
             </tr>
             <tr>
                 <td align="right">
-                    <label for="mail2">Mail :</label>
+                    <label for="email">Mail :</label>
                 </td>
                 <td>
-                    <input type="email" placeholder="Confirmez votre mail" id="email" name="email" value="<?php if(isset($mail2)) { echo $mail2; } ?>" />
+                    <input type="email" placeholder="Email" id="email" name="email" value="<?php if(isset($email)) { echo $email; } ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label for="email">Ressaisissez votre mail :</label>
+                </td>
+                <td>
+                    <input type="email" placeholder="Verif email" id="email2" name="email2" value="<?php if(isset($email2)) { echo $email2; } ?>" />
                 </td>
             </tr>
             <tr>
@@ -74,11 +101,11 @@ if(isset($_POST['forminscription'])){
             <tr>
                 <td align="right">
                     <label for="pro">Professionnel :</label>
-                    <input type="radio" id="pro" name="pro_or_not">
+                    <input type="radio" id="pro" name="pro_or_not" value="1">
                 </td>
                 <td>
                     <label for="pro">Particulier :</label>
-                    <input type="radio" id="particulier" name="pro_or_not">
+                    <input type="radio" id="particulier" name="pro_or_not" value="2">
                 </td>
             </tr>
             <tr>
