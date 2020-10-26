@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=connexions', 'root', 'root');
 $mail = 'dafrenchie2002@yahoo.fr';
 if(isset($_POST['submit'])) {
@@ -10,7 +10,20 @@ if(isset($_POST['submit'])) {
         die('Erreur SQL');
     }
 }
+/*function setInterval($f, $milliseconds)
+{
+    $seconds=(int)$milliseconds/1000;
+    while(true)
+    {
+        $f();
+        sleep($seconds);
+    }
+}
 
+
+setInterval(function(){
+    echo "hi!\n";
+}, 1000);*/
 ?>
 <!doctype html>
 <html lang="fr">
@@ -27,6 +40,11 @@ if(isset($_POST['submit'])) {
     <form action="" method="post">
         <button type="submit" value="Cliquez" name="submit">Submit</button>
     </form>
+</div>
+<div>
+    <?php
+    echo ('Votre adresse IP est <strong>' . $_SERVER['REMOTE_ADDR'] . '</strong>');
+    ?>
 </div>
 <div>
     <br><br>
@@ -53,7 +71,7 @@ if(isset($_POST['submit'])) {
  * ≤ à 50 millisecondes, ce qui est une bonne base pour les systèmes gérants les identifications
  * intéractivement.
  */
-$timeTarget = 0.05; // 50 millisecondes
+/*$timeTarget = 0.05; // 50 millisecondes
 
 $cost = 8;
 do {

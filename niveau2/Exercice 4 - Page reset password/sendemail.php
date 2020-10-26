@@ -24,7 +24,7 @@ function send_mail($to, $subject, $body)
 		'allow_self_signed' => true
 		)
 	);
-	$mail->SMTPDebug  = 0;  // mettez 2 pour avoir toutes les infos concernant l'envoi du mail sous la forme d'un echo                   
+	$mail->SMTPDebug  = 2;  // mettez 2 pour avoir toutes les infos concernant l'envoi du mail sous la forme d'un echo
 	$mail->SMTPAuth   = true;                  
 	$mail->SMTPSecure = 'tls';                 
 	$mail->Host       = 'smtp.gmail.com';      

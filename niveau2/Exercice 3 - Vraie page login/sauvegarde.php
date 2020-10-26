@@ -4,19 +4,16 @@
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=connexions', 'root', 'root');
 
 /* On déclanche le script au click */
-if(isset($_POST['submit'])){
-
+if(isset($_POST['submit'])) {
     /* Adresse du visiteur */
     $ip = $_SERVER['REMOTE_ADDR'];
-
     /* On vérifie que les champs soit bien remplis */
-    if(!empty($_POST['email']) && !empty($_POST['mdp'])){
-
+    if(!empty($_POST['email']) && !empty($_POST['mdp'])) {
         $email = htmlspecialchars($_POST['email']);
         $mdpClair = htmlspecialchars($_POST['mdp']);
 
         /* On vérifie que l'adresse mail soit dans un format valide*/
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
             $verifUserEmail = $bdd->prepare("SELECT * FROM connexions WHERE email = ?");
             $verifUserEmail->execute(array($email));
@@ -25,10 +22,11 @@ if(isset($_POST['submit'])){
             /* On vérifie si l'utlisateur est dans la bdd */
             if ($userExistEmail >= 1) {
 
-                /* On vérifie que l'utilisateur n'a pas été banni */
+                /* On intéroge la bdd des bans */
                 $verifUserBanniQuery = $bdd->query("SELECT COUNT(*) FROM `connexions.ip` WHERE `address` LIKE'$ip' AND `timestamp` > (now() - interval 15 minute )");
                 $verifUserBanni = $verifUserBanniQuery->fetch(PDO::FETCH_ASSOC);
 
+                /* On vérifie que l'utilisateur n'a pas été banni */
                 if($verifUserBanni >= 1) {
 
                     /* Récupération de la version hashée du mdp */
@@ -38,10 +36,8 @@ if(isset($_POST['submit'])){
                     /* Calcul du nombre de tentatives de connexions toutes les 5mn */
                     $resultQuery = $bdd->query("SELECT COUNT(*) FROM `connexions` WHERE `email` LIKE '$email' AND `date` > (now() - interval 5 minute)");
                     $result = $resultQuery->fetch(PDO::FETCH_ASSOC);
-
                     /* Si les tentatives de connexions > 5 */
                     if ($result["COUNT(*)"] < 4) {
-
 
                         /* On vérifie le mdp */
                         if (password_verify($mdpClair, $verifUserMdp['mdp'])) {
@@ -66,14 +62,12 @@ if(isset($_POST['submit'])){
                         echo "<script>alert('Vous n\'avez le droit qu\'à 3 essais toutes les 5 minutes')</script>";
                     }
 
-
                 } else {
                     $erreurs = '<script>alert("Vous êtes banni pendant 15mn")</script>';
                 }
             } else {
                 $erreurs = '<script>alert("Vous n\'etes pas inscrit")</script>';
             }
-
         } else {
             $erreurs = '<script>alert("Votre adresse mail n\'est pas valide")</script>';
         }
@@ -97,20 +91,19 @@ if(isset($erreurs)){
 </head>
 <body>
 <h3>Connexion</h3>
-    <form method="post" action="">
-        <div>
-            <label for="email">Mail : </label>
-            <input type="text" name="email" value="<?php if(isset($email)) {echo $email;}?>">
-        </div>
-        <div>
-            <label for="mdp">Mot de Passe : </label>
-            <input type="text" name="mdp">
-        </div>
-        <div>
-            <input type="submit" value="Soumettre" name="submit">
-        </div>
-    </form>
+<form method="post" action="">
+    <div>
+        <label for="email">Mail : </label>
+        <input type="text" name="email" value="<?php if(isset($email)) {echo $email;}?>">
+    </div>
+    <div>
+        <label for="mdp">Mot de Passe : </label>
+        <input type="text" name="mdp">
+    </div>
+    <div>
+        <input type="submit" value="Soumettre" name="submit">
+    </div>
+</form>
 </body>
 </html>
-
 
