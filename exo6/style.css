@@ -1,0 +1,294 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: rgb(201, 173, 167);
+    font-family: 'Ubuntu', sans-serif;
+    height: 100vh;
+}
+
+
+/* =================== */
+
+/* =================== */
+header {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 1.3rem;
+    color: aliceblue;
+    background-color: rgb(74, 78, 105);
+    height: 70px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.divLogo {
+    line-height: 100px;
+}
+
+img.logo {
+    height: 50px;
+    vertical-align: unset;
+}
+
+.divList {
+    line-height: 70px;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+input#deconnexion{
+    padding: 0.6rem 0.4rem;
+    color: rgb(74, 78, 105);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.2rem;
+    font-weight: normal;
+    border-radius: 10px;
+    border: 1px solid whitesmoke;
+}
+input#deconnexion:hover{
+    color: #f0f0f0;
+    background-color: rgb(74, 78, 105);
+}
+/* =================== */
+form.userEntry{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 150px auto;
+}
+table, th, td {
+    color: rgb(52, 56, 84);
+    padding: 8px 5px;
+    text-align: center;
+    border: 2px solid whitesmoke;
+    border-collapse: collapse;
+}
+table.tableHome{
+    margin: 5% auto 50px;
+}
+h3.tableHome{
+    color: whitesmoke;
+    padding-top: 5%;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: 30%;
+}
+form.tableHome{
+    margin: 0 auto;
+    width: 30%;
+}
+input.tableHome{
+    padding: 0.4rem 0.4rem;
+    color: rgb(74, 78, 105);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.1rem;
+    font-weight: normal;
+    border-radius: 5px;
+    border: 1px solid whitesmoke;
+}
+input.tableHome:hover, input.button:hover{
+    color: #f0f0f0;
+    background-color: rgb(74, 78, 105);
+}
+input.button{
+    padding: 0.2rem 0.2rem;
+    color: rgb(74, 78, 105);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 0.8rem;
+    font-weight: normal;
+    border-radius: 2px;
+    border: 1px solid whitesmoke;
+}
+input.create{
+    display: block;
+    margin: 0 auto;
+}
+/* =================== */
+    table.formUser{
+        margin: 150px auto;
+    }
+    input.formUser{
+        padding: 0.2rem 0.2rem;
+        color: rgb(74, 78, 105);
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 0.8rem;
+        font-weight: normal;
+        border-radius: 2px;
+        border: 1px solid whitesmoke;
+    }
+    input.formUser:hover{
+        color: #f0f0f0;
+        background-color: rgb(74, 78, 105);
+    }
+
+/* =================== */
+form.signin{
+    width: 70%;
+    margin: 10px auto;
+    text-align: center;
+}
+input.signin{
+   margin: 0 auto;
+    width: 70%;
+}
+ label.radio{
+    margin: 0 30px 0px 0;
+}
+ div.signinB{
+     margin: 0 auto;
+ }
+ button.signinB{
+     background-color: rgb(74, 78, 105);
+ }
+button.signinB:hover{
+    background-color: #659df0;
+}
+p.forgot{
+    margin-top: 13px;
+}
+div.signinA{
+    margin-top: 30px;
+}
+div.signinA a{
+    color: #345aa4;
+}
+div.signinA a:hover{
+    color: #588cf1;
+}
+/* =================== */
+
+.main {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 400px;
+    margin: 5em auto;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+.sign {
+    padding-top: 40px;
+    color: rgb(83, 89, 126);
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.un {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+form.form1 {
+    padding-top: 40px;
+}
+
+.pass {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.un:focus,
+.pass:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: rgb(83, 89, 126);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 29%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.forgot {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #C9ADA7;
+    padding-top: 15px;
+}
+
+a {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #a68aac;
+    text-decoration: none
+}
+
+
+/* =================== */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    padding-top: 5px;
+    width: 100%;
+    background-color: rgb(74, 78, 105);
+    color: whitesmoke;
+    height: 70px;
+}
+
+footer p {
+
+    line-height: 30px;
+    margin: 0 auto;
+    width: max-content;
+}
+footer a {
+    color: whitesmoke;
+}
+footer a:hover{
+    color: rgb(201, 173, 167);
+}
+
+/* =================== */
+
+@media (max-width: 600px) {
+    .main {
+        border-radius: 0px;
+    }
+}
